@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -70,7 +71,7 @@ public class CrimeListFragment extends Fragment {
         }
     }
 
-    private class CrimeHolder extends RecyclerView.ViewHolder {
+    private class CrimeHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private Crime mCrime;
         private TextView mTitleTextView;
@@ -79,6 +80,7 @@ public class CrimeListFragment extends Fragment {
 
         public CrimeHolder(@NonNull View itemView) {
             super(itemView);
+            itemView.setOnClickListener(this);
 
             mTitleTextView = itemView.findViewById(R.id.crime_list_item_title);
             mDateTextView = itemView.findViewById(R.id.crime_list_item_date);
@@ -93,5 +95,10 @@ public class CrimeListFragment extends Fragment {
             mSolvedCheckBox.setChecked(mCrime.isSolved());
         }
 
+        @Override
+        public void onClick(View v) {
+            Toast.makeText(getActivity(), mCrime.getTitle() + " clicked!",
+                    Toast.LENGTH_SHORT).show();
+        }
     }
 }
